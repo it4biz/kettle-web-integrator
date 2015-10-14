@@ -47,6 +47,9 @@ pdi_resultset.json()
 
 We create a python notebook to help you understand better the integration with python.
 
-Folder:
-kettle-web-integrator/samples/kettle-web-integrator-python-notebook
+Folder:<BR>
+kettle-web-integrator/samples/kettle-web-integrator-python-notebook<BR>
+
+File:<BR>
+Kettle Web Integrator - iPython Notebook.ipynb<BR>
 
