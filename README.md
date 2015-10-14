@@ -3,10 +3,11 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 
 #Python Code to integrate:
 
-'''
+```
 # Import python libs
 from lxml import html
 import requests
 
-'''
+```
+
 
