@@ -60,3 +60,6 @@ kettle-web-integrator/samples/kettle-web-integrator-python-notebook<BR>
 File:<BR>
 Kettle Web Integrator - iPython Notebook.ipynb<BR>
 
+Link:<BR>
+https://github.com/it4biz/kettle-web-integrator/blob/master/samples/kettle-web-integrator-python-notebook/Kettle%20Web%20Integrator%20-%20iPython%20Notebook.ipynb
+
