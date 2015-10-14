@@ -1,5 +1,28 @@
 # Kettle Web Integrator
+
+Welcome to Kettle Web integrator Project.
+
 Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration.
+
+### Usage
+
+	* Move your transformations file to kettle-web-integrator/kettle/transformations
+
+	* Move your jobs file to kette-web-integrator/kettle/jobs
+
+	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/index.jsp
+
+
+### Installation
+
+* Move kettle-web-integrator.war in a container Java.
+
+### Development
+
+* Open the project in netbeans IDE and set the jars available in data-integration/lib/.
+
+### Support
+* If you need support, please contact us creating a issue here (https://github.com/it4biz/kettle-web-integrator/issues).
 
 ###Python Code to integrate:
 
@@ -20,4 +43,10 @@ pdi_resultset.json()
 
 ```
 
+### Python Notebook - Kettle Web Integrator
+
+We create a python notebook to help you understand better the integration with python.
+
+Folder:
+kettle-web-integrator/samples/kettle-web-integrator-python-notebook
 
