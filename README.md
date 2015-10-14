@@ -21,6 +21,13 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 
 * Open the project in netbeans IDE and set the jars available in data-integration/lib/.
 
+### Tested Environment
+* Mac OS X El Capitan 10.11 Beta (15A278b)
+* pdi-ce-6.0.0.0-353
+* NetBeans 8.0.1
+* jdk1.7.0_80
+
+
 ### Support
 * If you need support, please contact us creating a issue here (https://github.com/it4biz/kettle-web-integrator/issues).
 
