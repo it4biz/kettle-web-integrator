@@ -4,6 +4,33 @@ Welcome to Kettle Web integrator Project.
 
 Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration.
 
+### Kettle / PDI
+
+Pentaho Data Integration (PDI, also called Kettle) is the component of Pentaho responsible for the Extract, Transform and Load (ETL) processes. Though ETL tools are most frequently used in data warehouses environments, PDI can also be used for other purposes:
+* Migrating data between applications or databases
+* Exporting data from databases to flat files
+* Loading data massively into databases
+* Data cleansing
+* Integrating applications
+ 
+PDI is easy to use. Every process is created with a graphical tool where you specify what to do without writing code to indicate how to do it; because of this, you could say that PDI is metadata oriented.
+
+PDI can be used as a standalone application, or it can be used as part of the larger Pentaho Suite. As an ETL tool, it is the most popular open source tool available. PDI supports a vast array of input and output formats, including text files, data sheets, and commercial and free database engines. Moreover, the transformation capabilities of PDI allow you to manipulate data with very few limitations.
+
+Source: http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+(Kettle)+Tutorial
+
+### Spoon
+
+Kettle is an acronym for "Kettle E.T.T.L. Environment." Kettle is designed to help you with your ETTL needs, which include the Extraction, Transformation, Transportation and Loading of data.
+
+Spoon is a graphical user interface that allows you to design transformations and jobs that can be run with the Kettle tools — Pan and Kitchen. Pan is a data transformation engine that performs a multitude of functions such as reading, manipulating, and writing data to and from various data sources. Kitchen is a program that executes jobs designed by Spoon in XML or in a database repository. Jobs are usually scheduled in batch mode to be run automatically at regular intervals.
+
+Note: For a complete description of Pan or Kitchen, see the Pan and Kitchen user guides.
+
+Transformations and Jobs can describe themselves using an XML file or can be put in a Kettle database repository. Pan or Kitchen can then read the data to execute the steps described in the transformation or to run the job. In summary, Pentaho Data Integration makes data warehouses easier to build, update, and maintain.
+
+Source: http://wiki.pentaho.com/display/EAI/.01+Introduction+to+Spoon
+
 ### Usage
 
 	* Move your transformations file to kettle-web-integrator/kettle/transformations
