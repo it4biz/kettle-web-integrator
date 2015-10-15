@@ -53,7 +53,7 @@ https://github.com/it4biz/kettle-web-integrator/tree/master/samples/matt-casters
 
 	* Move your jobs file to kette-web-integrator/kettle/jobs
 
-	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/index.jsp
+	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/
 
 
 ### Installing on Apache Tomcat 8.0.27
