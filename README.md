@@ -13,10 +13,25 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/index.jsp
 
 
-### Installation
+### Installation on Apache Tomcat 8.0.27
 
 * Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
-* Copy kettle-web-integrator.war in a container Java.
+* Download Apache Tomcat 8.0.27 from http://apache.rediris.es/tomcat/tomcat-8/v8.0.27/bin/apache-tomcat-8.0.27.tar.gz
+* Copy kettle-web-integrator.war to apache-tomcat-8.0.27/webapps
+* Find catalina.sh at apache-tomcat-8.0.27/bin
+* Run Catalina.sh in Apache Tomcat 8.0.27 using the command line: sh catalina.sh start
+
+Apache Tomcat 8.0.27 Linux Command Line Output:
+
+```
+Caios-MacBook-Pro:bin caiomsouza$ sh catalina.sh start
+Using CATALINA_BASE:   /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27
+Using CATALINA_HOME:   /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27
+Using CATALINA_TMPDIR: /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/temp
+Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home
+Using CLASSPATH:       /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/bin/bootstrap.jar:/Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/bin/tomcat-juli.jar
+Tomcat started.
+```
 
 ### Development
 
@@ -27,6 +42,7 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 * pdi-ce-6.0.0.0-353
 * NetBeans 8.0.1
 * jdk1.7.0_80
+* Apache Tomcat 8.0.27
 
 
 ### Support
