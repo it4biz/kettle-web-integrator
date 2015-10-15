@@ -15,6 +15,7 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 
 ### Installation
 
+* Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
 * Move kettle-web-integrator.war in a container Java.
 
 ### Development
