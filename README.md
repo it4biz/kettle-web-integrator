@@ -16,7 +16,7 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 ### Installation
 
 * Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
-* Move kettle-web-integrator.war in a container Java.
+* Copy kettle-web-integrator.war in a container Java.
 
 ### Development
 
@@ -63,4 +63,3 @@ Kettle Web Integrator - iPython Notebook.ipynb<BR>
 
 Link:<BR>
 https://github.com/it4biz/kettle-web-integrator/blob/master/samples/kettle-web-integrator-python-notebook/Kettle%20Web%20Integrator%20-%20iPython%20Notebook.ipynb
-
