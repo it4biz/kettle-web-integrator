@@ -2,7 +2,7 @@
 
 Welcome to Kettle Web integrator Project.
 
-Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration.
+Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration by IT4biz Global.
 
 ### Kettle / PDI
 
