@@ -17,7 +17,8 @@ PDI is easy to use. Every process is created with a graphical tool where you spe
 
 PDI can be used as a standalone application, or it can be used as part of the larger Pentaho Suite. As an ETL tool, it is the most popular open source tool available. PDI supports a vast array of input and output formats, including text files, data sheets, and commercial and free database engines. Moreover, the transformation capabilities of PDI allow you to manipulate data with very few limitations.
 
-Source: http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+(Kettle)+Tutorial
+Source: <BR>
+http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+(Kettle)+Tutorial<BR>
 
 ### Spoon
 
@@ -29,7 +30,8 @@ Note: For a complete description of Pan or Kitchen, see the Pan and Kitchen user
 
 Transformations and Jobs can describe themselves using an XML file or can be put in a Kettle database repository. Pan or Kitchen can then read the data to execute the steps described in the transformation or to run the job. In summary, Pentaho Data Integration makes data warehouses easier to build, update, and maintain.
 
-Source: http://wiki.pentaho.com/display/EAI/.01+Introduction+to+Spoon
+Source: <BR>
+http://wiki.pentaho.com/display/EAI/.01+Introduction+to+Spoon<BR>
 
 ### Origin of Kettle (PDI - Pentaho Data Integration)
 
