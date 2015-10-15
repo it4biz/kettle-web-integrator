@@ -13,7 +13,7 @@ Kettle Web Integrator - An easy and open way to integrate your web app with Kett
 	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/index.jsp
 
 
-### Installation on Apache Tomcat 8.0.27
+### Installing on Apache Tomcat 8.0.27
 
 * Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
 * Download Apache Tomcat 8.0.27 from http://apache.rediris.es/tomcat/tomcat-8/v8.0.27/bin/apache-tomcat-8.0.27.tar.gz
