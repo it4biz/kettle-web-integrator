@@ -33,7 +33,9 @@ Source: http://wiki.pentaho.com/display/EAI/.01+Introduction+to+Spoon
 
 ### Origin of Kettle (PDI - Pentaho Data Integration)
 
-In this video you will have the opportunity to learn about the Origin of Kettle (PDI - Pentaho Data Integration) told by Kettle creator Sr. Matt Casters at Pentaho Day 2014 on May, 16, 2014 in FEA/USP (School of Economics, Business and Accounting of the University of São Paulo).
+In this video you will have the opportunity to learn about the Origin of Kettle (PDI - Pentaho Data Integration) told by Kettle creator Mr. Matt Casters at Pentaho Day 2014 on May, 16, 2014 in FEA/USP (School of Economics, Business and Accounting of the University of São Paulo).
+
+In May, 16, 2014 Kettle was already a 11 years project.
 
 Link to the video:
 http://iptv.usp.br/portal/video.action?idItem=23309
