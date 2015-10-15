@@ -41,6 +41,9 @@ Link to the video:<BR>
 http://iptv.usp.br/portal/video.action?idItem=23309<BR>
 http://blog.professorcoruja.com/2015/10/origin-of-kettle-pdi-pentaho-data.html<BR>
 
+Slides:<BR>
+https://github.com/it4biz/kettle-web-integrator/tree/master/samples/matt-casters<BR>
+
 
 ### Usage
 
