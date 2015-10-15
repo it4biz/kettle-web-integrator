@@ -25,11 +25,11 @@ Apache Tomcat 8.0.27 Linux Command Line Output:
 
 ```
 Caios-MacBook-Pro:bin caiomsouza$ sh catalina.sh start
-Using CATALINA_BASE:   /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27
-Using CATALINA_HOME:   /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27
-Using CATALINA_TMPDIR: /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/temp
+Using CATALINA_BASE:   /Users/caiomsouza/Desktop/apache-tomcat-8.0.27
+Using CATALINA_HOME:   /Users/caiomsouza/Desktop/apache-tomcat-8.0.27
+Using CATALINA_TMPDIR: /Users/caiomsouza/Desktop/apache-tomcat-8.0.27/temp
 Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home
-Using CLASSPATH:       /Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/bin/bootstrap.jar:/Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/bin/tomcat-juli.jar
+Using CLASSPATH:       /Users/caiomsouza/Desktop/apache-tomcat-8.0.27/bin/bootstrap.jar:/Users/caiomsouza/Desktop/Ariadna/apache-tomcat-8.0.27/bin/tomcat-juli.jar
 Tomcat started.
 ```
 
