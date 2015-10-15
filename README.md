@@ -37,8 +37,10 @@ In this video you will have the opportunity to learn about the Origin of Kettle 
 
 In May, 16, 2014 Kettle was already a 11 years project. It started on March, 2003.
 
-Link to the video:
-http://iptv.usp.br/portal/video.action?idItem=23309
+Link to the video:<BR>
+http://iptv.usp.br/portal/video.action?idItem=23309<BR>
+http://blog.professorcoruja.com/2015/10/origin-of-kettle-pdi-pentaho-data.html<BR>
+
 
 ### Usage
 
