@@ -125,3 +125,22 @@ https://github.com/it4biz/kettle-web-integrator/blob/master/samples/kettle-web-i
 
 ### Project on SourceForge
 https://sourceforge.net/projects/kettle-web-integrator/
+
+### Changelog
+
+0.3 Beta version (Beta version for Production Environment):
+Release date: Oct, 21, 2015
+* Some improvements on the index.jsp page;
+* Add parameter description in the view;
+* Add columns in the view without running the transformation;
+* Tested with Apache Tomcat 8.0.27 and Kettle/PDI 6.0
+
+0.2 Alpha version (Not ready for Production Environment, just for internal tests):
+Release date: Oct, 15, 2015
+* Github page
+* Sourceforge Page to Download
+* A lot of improvements to go to Production Environment;
+* Tested with Apache Tomcat 8.0.27 and Kettle/PDI 6.0
+
+0.1 Alpha version (Not ready for Production Environment, just for internal tests):
+* First version, only for internal use.
