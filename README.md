@@ -134,6 +134,7 @@ Release date: Oct, 21, 2015
 * Add parameter description in the view;
 * Add columns in the view without running the transformation;
 * Tested with Apache Tomcat 8.0.27 and Kettle/PDI 6.0
+* Tested with GlassFish Server 4.1
 
 0.2 Alpha version (Not ready for Production Environment, just for internal tests):
 Release date: Oct, 15, 2015
@@ -141,6 +142,8 @@ Release date: Oct, 15, 2015
 * Sourceforge Page to Download
 * A lot of improvements to go to Production Environment;
 * Tested with Apache Tomcat 8.0.27 and Kettle/PDI 6.0
+* Tested with GlassFish Server 4.1
 
 0.1 Alpha version (Not ready for Production Environment, just for internal tests):
 * First version, only for internal use.
+* Tested with GlassFish Server 4.1
