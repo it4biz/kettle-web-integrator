@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>capturing_rows</name>
+    <name>user_defined_java_class_concatenate_firstname_lastname</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,11 +9,6 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>dummy</name>
-            <default_value/>
-            <description>just a example of description</description>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -72,74 +67,113 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2012&#x2f;04&#x2f;25 17&#x3a;12&#x3a;48.300</created_date>
+  <created_date>2011&#x2f;03&#x2f;23 15&#x3a;05&#x3a;46.581</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2012&#x2f;04&#x2f;25 17&#x3a;12&#x3a;48.300</modified_date>
+  <modified_date>2011&#x2f;03&#x2f;23 15&#x3a;05&#x3a;46.581</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>nr. rows in a bloc&#xa;1 &#x3d; one line &#xa;0 &#x3d; output all line to JSON File</note>
+      <xloc>448</xloc>
+      <yloc>288</yloc>
+      <width>203</width>
+      <heigth>58</heigth>
+      <fontname>Lucida Grande</fontname>
+      <fontsize>13</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
-    <name>ING</name>
-    <server>192.168.1.7</server>
-    <type>MYSQL</type>
+    <name>dw_habitacao</name>
+    <server>&#x24;&#x7b;DW_HABITACAO_HOST&#x7d;</server>
+    <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>ING</database>
-    <port>3333</port>
-    <username>root</username>
+    <database>&#x24;&#x7b;DW_HABITACAO_DATABASE&#x7d;</database>
+    <port>&#x24;&#x7b;DW_HABITACAO_PORT&#x7d;</port>
+    <username>&#x24;&#x7b;DW_HABITACAO_USERNAME&#x7d;</username>
+    <password>&#x24;&#x7b;DW_HABITACAO_PASSWORD&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;DW_HABITACAO_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>dw_it4biz</name>
+    <server>ec2-54-147-206-66.compute-1.amazonaws.com</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dw_it4biz</database>
+    <port>5432</port>
+    <username>dw_user</username>
+    <password>Encrypted 2be98afc82ae3a5ad9f4dac79c4c3fafa</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Sampledata</name>
+    <server/>
+    <type>H2</type>
+    <access>JNDI</access>
+    <database>SampleData</database>
+    <port>1521</port>
+    <username/>
     <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3333</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>Generate Rows</from><to>Add sequence</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add sequence</from><to>Generate random value</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate random value</from><to>dummy</to><enabled>Y</enabled> </hop>
-  <hop> <from>dummy</from><to>Select Values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows</from><to>User Defined Java Class</to><enabled>Y</enabled> </hop>
+  <hop> <from>User Defined Java Class</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>JSON_OUTPUT</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Errors</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <valuename>counter</valuename>
-      <use_database>N</use_database>
-      <connection>ING</connection>
-      <schema/>
-      <seqname>SEQ_</seqname>
-      <use_counter>Y</use_counter>
-      <counter_name/>
-      <start_at>1</start_at>
-      <increment_by>1</increment_by>
-      <max_value>999999999</max_value>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
-      <yloc>185</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Generate Rows</name>
     <type>RowGenerator</type>
@@ -152,23 +186,47 @@
            <schema_name/>
            </partitioning>
     <fields>
+      <field>
+        <name>firstname</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>John</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lastname</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Doe</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
-    <limit>10</limit>
+    <limit>1000</limit>
     <never_ending>N</never_ending>
     <interval_in_ms/>
     <row_time_field/>
     <last_time_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>95</xloc>
-      <yloc>184</yloc>
+      <xloc>64</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Generate random value</name>
-    <type>RandomValue</type>
+    <name>User Defined Java Class</name>
+    <type>UserDefinedJavaClass</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -177,22 +235,185 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[
+String firstnameField;
+String lastnameField;
+String nameField;
+
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+{
+    // First, get a row from the default input hop
+	//
+	Object[] r = getRow();
+
+    // If the row object is null, we are done processing.
+	//
+	if (r == null) {
+		setOutputDone();
+		return false;
+	}
+
+	// Let's look up parameters only once for performance reason.
+	//
+	if (first) {
+		firstnameField = getParameter("FIRSTNAME_FIELD");
+		lastnameField = getParameter("LASTNAME_FIELD");
+		nameField = getParameter("NAME_FIELD");
+	    first=false;
+	}
+
+    // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
+    // enough to handle any new fields you are creating in this step.
+	//
+    Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+	String firstname = get(Fields.In, firstnameField).getString(r);
+	String lastname = get(Fields.In, lastnameField).getString(r);
+	
+	// Set the value in the output field
+	//
+	String name = firstname+" "+lastname;
+	get(Fields.Out, nameField).setValue(outputRow, name);
+    
+    // putRow will send the row on to the default output hop.
+	//
+    putRow(data.outputRowMeta, outputRow);
+
+	return true;
+}]]></class_source>
+        </definition>
+    </definitions>
     <fields>
-      <field>
-        <name>guid</name>
-        <type>random uuid4</type>
-      </field>
-    </fields>
-     <cluster_schema/>
+        <field>
+        <field_name>name</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters><usage_parameter><parameter_tag>FIRSTNAME_FIELD</parameter_tag>
+<parameter_value>firstname</parameter_value>
+<parameter_description>The name of the field that contains the first name</parameter_description>
+</usage_parameter><usage_parameter><parameter_tag>LASTNAME_FIELD</parameter_tag>
+<parameter_value>lastname</parameter_value>
+<parameter_description>The name of the field that contains the last name</parameter_description>
+</usage_parameter><usage_parameter><parameter_tag>NAME_FIELD</parameter_tag>
+<parameter_value>name</parameter_value>
+<parameter_description>The name of the output field.</parameter_description>
+</usage_parameter></usage_parameters>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>185</yloc>
+      <xloc>288</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>dummy</name>
+    <name>JSON_OUTPUT</name>
+    <type>JsonOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <outputValue>outputValue</outputValue>
+    <jsonBloc>data</jsonBloc>
+    <nrRowsInBloc>0</nrRowsInBloc>
+    <operation_type>writetofile</operation_type>
+    <compatibility_mode>N</compatibility_mode>
+    <encoding>UTF-8</encoding>
+    <addtoresult>N</addtoresult>
+    <file>
+      <name>&#x2f;Users&#x2f;caiomsouza&#x2f;Desktop&#x2f;json_output</name>
+      <extention>js</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      <servlet_output>N</servlet_output>
+      </file>
+    <fields>
+      <field>
+        <name>firstname</name>
+        <element>firstname</element>
+    </field>
+      <field>
+        <name>lastname</name>
+        <element>lastname</element>
+    </field>
+      <field>
+        <name>name</name>
+        <element>name</element>
+    </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>352</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>JSON_OUTPUT</send_true_to>
+<send_false_to>Errors</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>firstname</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>lastname</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Errors</name>
     <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
@@ -204,36 +425,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>460</xloc>
-      <yloc>185</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select Values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>counter</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>guid</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>192</yloc>
+      <xloc>736</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -55,9 +55,10 @@ page language="java"
             RowMetaInterface rowStructure;
             String jsonResult;
             Metadata[] metadata;
-            List<String> resultset;
+            List<String> resultsetCda;
+            List<String> resultsetVisualCue;
             
-            public void runTransformation(String filename, String endpointPath, HttpServletRequest request) {
+            public void runTransformation(String filename, String endpointPath, String endpointPathLabel, Boolean showOnlyColumns, HttpServletRequest request) {
 
                 try {
 
@@ -75,6 +76,9 @@ page language="java"
                         transMeta.setParameterValue(parameterName, parameterValue);
 
                     }
+                    
+                    if(showOnlyColumns)
+                        transMeta.setParameterValue("endpointPath", endpointPath);
 
                     Trans transformation = new Trans(transMeta);
 
@@ -103,7 +107,8 @@ page language="java"
                                 rowStructure = rowMeta;
 
                                 metadata = new Metadata[rowMeta.size()];
-                                resultset = new LinkedList<String>();
+                                resultsetCda = new LinkedList<String>();
+                                resultsetVisualCue = new LinkedList<String>();
                                 
                                 for (int i = 0; i < rowMeta.size(); i++) {
                                      metadata[i] = new Metadata();
@@ -116,17 +121,24 @@ page language="java"
                             try {
                                 
                                 boolean firstColumnResultset = true;
-                                String rowResult = new String();
-                                rowResult="";  
+                                String rowResultCda = new String();
+                                String rowResultVisualCue = new String();
+                                rowResultCda="";
+                                rowResultVisualCue="";
                                 for (int i = 0; i < rowMeta.size(); i++) {
                                     if (firstColumnResultset){ 
                                         firstColumnResultset = false;
-                                        rowResult ="\""+ rowMeta.getString(row, i).toString().trim() +"\"";
-                                    }else
-                                        rowResult +=",\""+ rowMeta.getString(row, i).toString().trim() +"\"";
+                                        rowResultCda ="\""+ rowMeta.getString(row, i).toString().trim() +"\"";
+                                        rowResultVisualCue ="\""+ rowMeta.getFieldNames()[i] +"\": " + "\""+ rowMeta.getString(row, i).toString().trim() +"\"";
+                                    }else{
+                                        rowResultCda +=",\""+ rowMeta.getString(row, i).toString().trim() +"\"";
+                                        rowResultVisualCue +=",\""+ rowMeta.getFieldNames()[i].toString() + "\": " + "\""+ rowMeta.getString(row, i).toString().trim() +"\"";
+                                    }
+                                    
                                 }
-                                resultset.add(rowResult);
-                                //System.out.print(rowMeta.getString(row, 0));
+                                resultsetCda.add(rowResultCda);
+                                resultsetVisualCue.add(rowResultVisualCue);
+                                
                                 
                                 
                                 // keep the row 
@@ -149,8 +161,15 @@ page language="java"
                     Result result = transformation.getResult();
 
                     // report on the outcome of the transformation
-                    String resultRun = "Trans " + endpointPath + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
-                    jsonResult = "{\"status\": \""+resultRun+"\", \"metadata\":["+MetadataToJson(metadata)+"], \"resultset\":["+resultsetToJson(resultset)+"]}";    
+                    String resultRun = "Trans " + endpointPathLabel + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
+                    
+                    String outputType = request.getParameter("output_type");
+                    
+                    if(outputType.equals("cda"))
+                        jsonResult = "{\"status\": \""+resultRun+"\", \"metadata\":["+MetadataToJson(metadata)+"], \"resultset\":["+resultsetToCDAJson(resultsetCda)+"]}";    
+                    else if(outputType.equals("visualcue"))
+                        jsonResult = "{\"data\":["+resultsetToVisualCueJson(resultsetVisualCue)+"]}";    
+                    System.out.print(jsonResult);
                 } catch (Exception e) {
                     // something went wrong, just log and return
                     e.printStackTrace();
@@ -176,7 +195,7 @@ page language="java"
                 return json;
             }
             
-            static public String resultsetToJson(List<String> resultset) {
+            static public String resultsetToCDAJson(List<String> resultset) {
                 String json = "";
                 Boolean firstRow = true;
                 for (String item : resultset) {
@@ -189,16 +208,46 @@ page language="java"
                 }
                 return json;
             }
+            
+            static public String resultsetToVisualCueJson(List<String> resultset) {
+                String json = "";
+                Boolean firstRow = true;
+                for (String item : resultset) {
+                    
+                    if (firstRow) {
+                        firstRow = false;
+                        json += "{"+ item +"}";
+                    } else {
+                        json += ",{"+ item +"}";
+                    }                  
+                }
+                //System.out.print(json);
+                return json;
+                
+            }
         %>
 
         <%
+            //clear cache
+            jsonResult = "";
             //init Kettle
             try {
+                Boolean showOnlyColumns = request.getParameter("showOnlyColumns") == null ? false : true;
+                //Boolean showOnlyColumns = showOnlyColumnsTemp.equals("true") ? true : false;
+                
                 String endpointPath = request.getParameter("endpointPath");
-
+                String endpointPathLabel = showOnlyColumns == false ? request.getParameter("endpointPath") : "getColumns.ktr";
+    
                 KettleEnvironment.init();
                 String webRootPath = application.getRealPath("/").replace('\\', '/');
-                runTransformation(webRootPath + "kettle/" + endpointPath, endpointPath, request);
+                String endpointPathReal = showOnlyColumns == false ? webRootPath + "kettle/" + endpointPath : webRootPath + "kettle/system/getColumns.ktr";
+                /*
+                System.out.println("\nendpointPathReal: "+endpointPathReal+"\n"
+                +"endpointPath: "+endpointPath+"\n"
+                +"endpointPathLabel: "+endpointPathLabel+"\n"
+                +"showOnlyColumns: "+showOnlyColumns+"\n");
+                */
+                runTransformation(endpointPathReal, endpointPath, endpointPathLabel, showOnlyColumns, request);
             } catch (KettleException e) {
                 e.printStackTrace();
                 return;

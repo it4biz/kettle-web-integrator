@@ -63,9 +63,27 @@ page language="java"
             + "<input type='hidden' id='endpointPath' name='endpointPath' value='${endpoint_path}'>"
             + "<hr>"
             + "<div class='form-group'>"
-            + "<label for='stepOutput'>Step output name</label>"
+            + "<label for='stepOutput'>Step output name (insert the name of step that you want show data)</label>"
             + "<input type='text' class='form-control' id='stepOutput' name='stepOutput' value='OUTPUT'>"
             + "</div>"
+            + "<div class='checkbox'>"
+            + "<label>"
+            + "<input type='checkbox' value='true' name='showOnlyColumns'id='showOnlyColumns'> Show only columns?"
+            + "</label>"
+            + "</div>"
+            + "<div class='radio'>"
+            + "    <label>"
+            + "     <input type='radio' name='output_type' id='output_type1' value='cda' checked>"
+            + "     CDA Output"
+            + "   </label>"
+            + "</div>"
+            + "<div class='radio'>"
+            + "   <label>"
+            + "     <input type='radio' name='output_type'  id='output_type2' value='visualcue'>"
+            + "     VisualCue Output"
+            + "   </label>"
+            + " </div>"
+            + " </div>"
             + "<button type='submit' class='btn btn-default btn-lg pull-right'>"
             + "<span class='glyphicon glyphicon-play' aria-hidden='true'></span> run"
             + "</button>"
@@ -115,8 +133,8 @@ page language="java"
                         String typeFile;
                         String parameters = "";
                         String parameterTemplate = "<div class='form-group'>"
-                                + "<label for='input${parameter_name}'>${parameter_name}</label>"
-                                + "<input type='text' class='form-control' id='${parameter_name}' name='${parameter_name}' value='${parameter_default_value}'>"
+                                + "<label for='input${parameter_name}'>Parameter Name: ${parameter_name} <BR> Parameter Description: ${parameter_description}</label>"
+                                + "<BR>Default Value: <input type='text' class='form-control' id='${parameter_name}' name='${parameter_name}' value='${parameter_default_value}'>"
                                 + "</div>";
 
                         //verify if is transformation or job
@@ -127,11 +145,12 @@ page language="java"
 
                             for (int i = 0; i < declaredParameters.length; i++) {
                                 String parameterName = declaredParameters[i];
-                                //String description = transMeta.getParameterDescription(parameterName) == null ? "" : transMeta.getParameterDescription(parameterName);
+                                String description = transMeta.getParameterDescription(parameterName) == null ? "" : " (" + transMeta.getParameterDescription(parameterName) + ")";
                                 String defaultValue = transMeta.getParameterDefault(parameterName) == null ? "" : transMeta.getParameterDefault(parameterName);
                                 //System.out.println("template: \n"+transMeta.getParameterDescription(parameterName)+"\n"+transMeta.getParameterDefault(parameterName));
                                 String separator = i > 0 ? "<hr>" : "";
                                 parameters += parameterTemplate.replace("${parameter_name}", parameterName)
+                                        .replace("${parameter_description}", description)
                                         .replace("${parameter_default_value}", defaultValue);
                             }
                         } else {
@@ -141,11 +160,12 @@ page language="java"
 
                             for (int i = 0; i < declaredParameters.length; i++) {
                                 String parameterName = declaredParameters[i];
-                                //String description = transMeta.getParameterDescription(parameterName) == null ? "" : transMeta.getParameterDescription(parameterName);
+                                String description = jobMeta.getParameterDescription(parameterName) == null ? "" : " (" + jobMeta.getParameterDescription(parameterName) + ")";
                                 String defaultValue = jobMeta.getParameterDefault(parameterName) == null ? "" : jobMeta.getParameterDefault(parameterName);
                                 //System.out.println("template: \n"+transMeta.getParameterDescription(parameterName)+"\n"+transMeta.getParameterDefault(parameterName));
                                 //String separator = i > 0 ? "<hr>" : "";
                                 parameters += parameterTemplate.replace("${parameter_name}", parameterName)
+                                        .replace("${parameter_description}", description)
                                         .replace("${parameter_default_value}", defaultValue);
                             }
                             //parameters += "<hr>";
@@ -156,10 +176,11 @@ page language="java"
                         listTableFormatted += listTableTemplate.replace("${short_filename}", rowMeta.getString(row, 1))
                                 .replace("${parameters}", parameters)
                                 .replace("${endpoint_path}", endpointPath)
-                                .replace("${type_file}", contextWeb+"/run" + typeFile + ".jsp");
+                                .replace("${type_file_show_columns}", contextWeb + "/showColumns" + typeFile + ".jsp")
+                                .replace("${type_file}", contextWeb + "/run" + typeFile + ".jsp");
                         // keep the row 
                         capturedRows.add(row);
-                        
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -211,6 +232,9 @@ page language="java"
                 <h1>List Endpoints <small>Kettle Web integrator</small></h1>
             </div>
 
+            <p>Click here, to view this page as a json. (Not implemented yet).</p>
+
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -224,11 +248,14 @@ page language="java"
             </table>
 
             <div id="footer" class="pull-right">
+
+
+
                 <p>Copyright &copy; 2007-<%=String.valueOf(year)%> by IT4biz Global</p>
-                
+
                 <p>
                     <a target="no_blank" href="http://www.it4biz.com.br">Powered by 
-                    <img height="40px" src="http://www.it4biz.com.br/extras/logo-it4biz-wordpress.png"></a>
+                        <img height="40px" src="http://www.it4biz.com.br/extras/logo-it4biz-wordpress.png"></a>
                 </p>
             </div>
         </div>

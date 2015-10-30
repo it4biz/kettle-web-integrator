@@ -12,12 +12,12 @@
         <parameter>
             <name>company</name>
             <default_value>IT4biz</default_value>
-            <description/>
+            <description>name of company</description>
         </parameter>
         <parameter>
             <name>country</name>
             <default_value>Brazil</default_value>
-            <description/>
+            <description>name of country</description>
         </parameter>
     </parameters>
     <log>
@@ -112,6 +112,7 @@
   </connection>
   <order>
   <hop> <from>Generate Rows</from><to>Get Variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>OUTPUT 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>OUTPUT</to><enabled>Y</enabled> </hop>
   </order>
   <step>
@@ -168,7 +169,7 @@
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -210,7 +211,7 @@
     </step>
 
   <step>
-    <name>OUTPUT</name>
+    <name>OUTPUT 2</name>
     <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
@@ -222,8 +223,44 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>368</xloc>
-      <yloc>112</yloc>
+      <xloc>400</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>OUTPUT</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>inteiro</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>company</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>country</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>400</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

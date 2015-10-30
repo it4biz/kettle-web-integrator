@@ -2,7 +2,7 @@
 
 Welcome to Kettle Web integrator Project.
 
-Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration by IT4biz Global.
+Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration.
 
 ### Kettle / PDI
 
@@ -17,8 +17,7 @@ PDI is easy to use. Every process is created with a graphical tool where you spe
 
 PDI can be used as a standalone application, or it can be used as part of the larger Pentaho Suite. As an ETL tool, it is the most popular open source tool available. PDI supports a vast array of input and output formats, including text files, data sheets, and commercial and free database engines. Moreover, the transformation capabilities of PDI allow you to manipulate data with very few limitations.
 
-Source: <BR>
-http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+(Kettle)+Tutorial<BR>
+Source: http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+(Kettle)+Tutorial
 
 ### Spoon
 
@@ -30,8 +29,7 @@ Note: For a complete description of Pan or Kitchen, see the Pan and Kitchen user
 
 Transformations and Jobs can describe themselves using an XML file or can be put in a Kettle database repository. Pan or Kitchen can then read the data to execute the steps described in the transformation or to run the job. In summary, Pentaho Data Integration makes data warehouses easier to build, update, and maintain.
 
-Source: <BR>
-http://wiki.pentaho.com/display/EAI/.01+Introduction+to+Spoon<BR>
+Source: http://wiki.pentaho.com/display/EAI/.01+Introduction+to+Spoon
 
 ### Origin of Kettle (PDI - Pentaho Data Integration)
 
@@ -43,9 +41,6 @@ Link to the video:<BR>
 http://iptv.usp.br/portal/video.action?idItem=23309<BR>
 http://blog.professorcoruja.com/2015/10/origin-of-kettle-pdi-pentaho-data.html<BR>
 
-Slides:<BR>
-https://github.com/it4biz/kettle-web-integrator/tree/master/samples/matt-casters<BR>
-
 
 ### Usage
 
@@ -53,12 +48,12 @@ https://github.com/it4biz/kettle-web-integrator/tree/master/samples/matt-casters
 
 	* Move your jobs file to kette-web-integrator/kettle/jobs
 
-	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/
+	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/index.jsp
 
 
 ### Installing on Apache Tomcat 8.0.27
 
-* Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.3/kettle-web-integrator.war/download
+* Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
 * Download Apache Tomcat 8.0.27 from http://apache.rediris.es/tomcat/tomcat-8/v8.0.27/bin/apache-tomcat-8.0.27.tar.gz
 * Copy kettle-web-integrator.war to apache-tomcat-8.0.27/webapps
 * Find catalina.sh at apache-tomcat-8.0.27/bin
@@ -125,25 +120,3 @@ https://github.com/it4biz/kettle-web-integrator/blob/master/samples/kettle-web-i
 
 ### Project on SourceForge
 https://sourceforge.net/projects/kettle-web-integrator/
-
-### Changelog
-
-0.3 Beta version (Beta version for Production Environment):
-Release date: Oct, 21, 2015
-* Some improvements on the index.jsp page;
-* Add parameter description in the view;
-* Add columns in the view without running the transformation;
-* Tested with Apache Tomcat 8.0.27 and Kettle/PDI 6.0
-* Tested with GlassFish Server 4.1
-
-0.2 Alpha version (Not ready for Production Environment, just for internal tests):
-Release date: Oct, 15, 2015
-* Github page
-* Sourceforge Page to Download
-* A lot of improvements to go to Production Environment;
-* Tested with Apache Tomcat 8.0.27 and Kettle/PDI 6.0
-* Tested with GlassFish Server 4.1
-
-0.1 Alpha version (Not ready for Production Environment, just for internal tests):
-* First version, only for internal use.
-* Tested with GlassFish Server 4.1
