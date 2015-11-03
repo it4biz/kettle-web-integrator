@@ -49,7 +49,8 @@ http://blog.professorcoruja.com/2015/10/origin-of-kettle-pdi-pentaho-data.html<B
 	* Move your jobs file to kette-web-integrator/kettle/jobs
 
 	* Access the url http://localhost:<portOfContainer>/kettle-web-integrator/index.jsp
-
+	 
+	* If you want to have the fields list, it's necessary that the output step is a 'select values' and rename the step to 'OUTPUT'.
 
 ### Installing on Apache Tomcat 8.0.27
 
