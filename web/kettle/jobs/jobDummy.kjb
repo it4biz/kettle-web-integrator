@@ -14,12 +14,12 @@
         <parameter>
             <name>company</name>
             <default_value>it4biz</default_value>
-            <description>name of company</description>
+            <description>String</description>
         </parameter>
         <parameter>
             <name>name</name>
             <default_value/>
-            <description>just a example of description parameter</description>
+            <description>String</description>
         </parameter>
     </parameters>
     <slaveservers>

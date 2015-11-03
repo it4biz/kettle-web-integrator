@@ -232,7 +232,7 @@ page language="java"
                 <h1>List Endpoints <small>Kettle Web integrator</small></h1>
             </div>
 
-            <p>Click here, to view this page as a json. (Not implemented yet).</p>
+            <a href="/kettle-web-integrator/metadataTransformations.jsp" target="no_blank">Click here, to view this page as a XML.</a>
 
 
             <table class="table table-bordered">
