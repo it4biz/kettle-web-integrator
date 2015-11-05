@@ -98,6 +98,11 @@ page language="java"
             // load transformation definition file
             TransMeta transMeta = new TransMeta(filename, (Repository) null);
 
+            //if endpointTypeList = null, will list all transformations and jobs
+            //if endpointTypeList = ktr, will list only transformations
+            //if endpointTypeList = kjb, will list only jobs
+            //transMeta.setParameterValue("endpointTypeList", endpointTypeList);
+            
             // crate a transformation object
             Trans transformation = new Trans(transMeta);
 
@@ -106,7 +111,7 @@ page language="java"
 
             // preparing the executing initializes all steps
             transformation.prepareExecution(new String[0]);
-
+   
             // find the "output" step
             StepInterface step = transformation.getStepInterface("OUTPUT", 0);
 
@@ -231,8 +236,14 @@ page language="java"
             <div class="page-header">
                 <h1>List Endpoints <small>Kettle Web integrator</small></h1>
             </div>
-
-            <a href="/kettle-web-integrator/metadataTransformations.jsp" target="no_blank">Click here, to view this page as a XML.</a>
+            <p>
+                <a href="/kettle-web-integrator/metadataTransformations.jsp" target="no_blank">Click here, to view this page as a XML |</a> 
+                    <small><a href="/kettle-web-integrator/metadataTransformations.jsp?endpointTypeList=ktr" target="no_blank">Only transformations |</a></small>
+                    <small><a href="/kettle-web-integrator/metadataTransformations.jsp?endpointTypeList=kjb" target="no_blank">Only jobs.</a></small>
+            </p>
+            
+            
+            
 
 
             <table class="table table-bordered">

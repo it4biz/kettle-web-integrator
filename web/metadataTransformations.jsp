@@ -68,7 +68,7 @@ page language="java"
     JAXBContext context;
     Marshaller jaxbMarshaller;
 
-    public void getTransformationMetadata(String filename) {
+    public void getTransformationMetadata(String filename, String endpointTypeList) {
         transforms = new Transforms();
         transforms.setTransform(new ArrayList<Transform>());
 
@@ -76,6 +76,11 @@ page language="java"
 
             // load transformation definition file
             TransMeta transMeta = new TransMeta(filename, (Repository) null);
+            
+            //if endpointTypeList = null, will list all transformations and jobs
+            //if endpointTypeList = ktr, will list only transformations
+            //if endpointTypeList = kjb, will list only jobs
+            transMeta.setParameterValue("endpointTypeList", endpointTypeList);
 
             // crate a transformation object
             Trans transformation = new Trans(transMeta);
@@ -277,7 +282,9 @@ page language="java"
         KettleEnvironment.init();
         webRootPath = application.getRealPath("/").replace('\\', '/');
         contextWeb = request.getContextPath();
-        getTransformationMetadata(webRootPath + "kettle/system/listEndpoints.ktr");
+        String endpointTypeList = request.getParameter("endpointTypeList");
+        
+        getTransformationMetadata(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList);
 
         out.write(xmlResult);
     } catch (KettleException e) {
