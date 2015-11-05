@@ -91,7 +91,7 @@ page language="java"
             + "</td>"
             + "</tr>";
 
-    public void runTransformation(String filename) {
+    public void runTransformation(String filename, String endpointTypeList, String directory) {
 
         try {
 
@@ -101,8 +101,11 @@ page language="java"
             //if endpointTypeList = null, will list all transformations and jobs
             //if endpointTypeList = ktr, will list only transformations
             //if endpointTypeList = kjb, will list only jobs
-            //transMeta.setParameterValue("endpointTypeList", endpointTypeList);
-            
+            transMeta.setParameterValue("endpointTypeList", endpointTypeList);
+
+            //if directory = null, by default will get data from folder kettle
+            transMeta.setParameterValue("directory", directory);
+
             // crate a transformation object
             Trans transformation = new Trans(transMeta);
 
@@ -111,7 +114,7 @@ page language="java"
 
             // preparing the executing initializes all steps
             transformation.prepareExecution(new String[0]);
-   
+
             // find the "output" step
             StepInterface step = transformation.getStepInterface("OUTPUT", 0);
 
@@ -213,8 +216,11 @@ page language="java"
         listTableFormatted = "";
         KettleEnvironment.init();
         String webRootPath = application.getRealPath("/").replace('\\', '/');
+        String endpointTypeList = request.getParameter("endpointTypeList");
+        String directory = request.getParameter("directory");
+
         contextWeb = request.getContextPath();
-        runTransformation(webRootPath + "kettle/system/listEndpoints.ktr");
+        runTransformation(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
     } catch (KettleException e) {
         e.printStackTrace();
         return;
@@ -236,11 +242,38 @@ page language="java"
             <div class="page-header">
                 <h1>List Endpoints <small>Kettle Web integrator</small></h1>
             </div>
-            <p>
-                <a href="/kettle-web-integrator/metadataTransformations.jsp" target="no_blank">Click here, to view this page as a XML |</a> 
-                    <small><a href="/kettle-web-integrator/metadataTransformations.jsp?endpointTypeList=ktr" target="no_blank">Only transformations |</a></small>
-                    <small><a href="/kettle-web-integrator/metadataTransformations.jsp?endpointTypeList=kjb" target="no_blank">Only jobs.</a></small>
-            </p>
+            <div>
+                <form target="_blank" action="/kettle-web-integrator/metadataTransformations.jsp" method="get" class="form-inline">
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="directory">Data from directory </label>
+                            <input type="text" class="form-control" id="directory" name="directory" value="kettle">
+                        </div>
+
+                        <label for="endpointTypeList">Show endpoints of type</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="endpointTypeList" id="endpointTypeList" value="" checked>
+                                All
+                            </label>
+                            <label>
+                                <input type="radio" name="endpointTypeList" id="endpointTypeList" value="ktr">
+                                Only transformations
+                            </label>
+                            <label>
+                                <input type="radio" name="endpointTypeList"  id="endpointTypeList" value="kjb">
+                                Only jobs
+                            </label>
+                        </div>
+                    </div>      
+                    <button type='submit' class='btn btn-default btn-md pull-right'>
+                        <span class='glyphicon glyphicon-play' aria-hidden='true'></span> View this page as a XML
+                    </button>
+                </form>
+            </div>
+            
+            <hr>
             
             <table class="table table-bordered">
                 <thead>

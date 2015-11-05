@@ -68,7 +68,7 @@ page language="java"
     JAXBContext context;
     Marshaller jaxbMarshaller;
 
-    public void getTransformationMetadata(String filename, String endpointTypeList) {
+    public void getTransformationMetadata(String filename, String endpointTypeList, String directory) {
         transforms = new Transforms();
         transforms.setTransform(new ArrayList<Transform>());
 
@@ -81,7 +81,10 @@ page language="java"
             //if endpointTypeList = ktr, will list only transformations
             //if endpointTypeList = kjb, will list only jobs
             transMeta.setParameterValue("endpointTypeList", endpointTypeList);
-
+            
+            //if directory = null, by default will get data from folder kettle
+            transMeta.setParameterValue("directory", directory);
+            
             // crate a transformation object
             Trans transformation = new Trans(transMeta);
 
@@ -283,8 +286,9 @@ page language="java"
         webRootPath = application.getRealPath("/").replace('\\', '/');
         contextWeb = request.getContextPath();
         String endpointTypeList = request.getParameter("endpointTypeList");
+        String directory = request.getParameter("directory");
         
-        getTransformationMetadata(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList);
+        getTransformationMetadata(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
 
         out.write(xmlResult);
     } catch (KettleException e) {

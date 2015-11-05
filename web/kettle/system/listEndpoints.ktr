@@ -10,6 +10,11 @@
     <directory>&#x2f;</directory>
     <parameters>
         <parameter>
+            <name>directory</name>
+            <default_value>kettle</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>endpointTypeList</name>
             <default_value/>
             <description/>
@@ -344,7 +349,7 @@
     <dynamic_include_subfolders>N</dynamic_include_subfolders>
     <limit>0</limit>
     <file>
-      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;jobs&#x2f;</name>
+      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;&#x24;&#x7b;directory&#x7d;&#x2f;jobs&#x2f;</name>
       <filemask>.&#x2a;&#x5c;.kjb</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -383,7 +388,7 @@
     <dynamic_include_subfolders>N</dynamic_include_subfolders>
     <limit>0</limit>
     <file>
-      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;transformations&#x2f;</name>
+      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;..&#x2f;&#x24;&#x7b;directory&#x7d;&#x2f;transformations&#x2f;</name>
       <filemask>.&#x2a;&#x5c;.ktr</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
