@@ -242,10 +242,6 @@ page language="java"
                     <small><a href="/kettle-web-integrator/metadataTransformations.jsp?endpointTypeList=kjb" target="no_blank">Only jobs.</a></small>
             </p>
             
-            
-            
-
-
             <table class="table table-bordered">
                 <thead>
                     <tr>
