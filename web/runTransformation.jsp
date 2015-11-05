@@ -50,208 +50,220 @@ page language="java"
 
 <%@page contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
 
-        <%!
-            List<Object[]> capturedRows;
-            RowMetaInterface rowStructure;
-            String jsonResult;
-            Metadata[] metadata;
-            List<String> resultsetCda;
-            List<String> resultsetVisualCue;
-            
-            public void runTransformation(String filename, String endpointPath, String endpointPathLabel, Boolean showOnlyColumns, HttpServletRequest request) {
+<%!
+    List<Object[]> capturedRows;
+    RowMetaInterface rowStructure;
+    String jsonResult;
+    Metadata[] metadata;
+    List<String> resultsetCda;
+    List<String> resultsetVisualCue;
 
-                try {
+    public void runTransformation(String filename, String endpointPath, String endpointPathLabel, Boolean showOnlyColumns, HttpServletRequest request) {
 
-                    // load transformation definition file
-                    TransMeta transMeta = new TransMeta(filename, (Repository) null);
+        try {
 
-                    //set parameters values
-                    String[] declaredParameters = transMeta.listParameters();
-                    for (int i = 0; i < declaredParameters.length; i++) {
-                        String parameterName = declaredParameters[i];
-                        String defaultValue = transMeta.getParameterDefault(parameterName);
-                        String parameterValue = request.getParameter(parameterName) == null ? defaultValue : request.getParameter(parameterName);
+            // load transformation definition file
+            TransMeta transMeta = new TransMeta(filename, (Repository) null);
 
-                        // assign the value to the parameter on the transformation
-                        transMeta.setParameterValue(parameterName, parameterValue);
+            //set parameters values
+            String[] declaredParameters = transMeta.listParameters();
+            for (int i = 0; i < declaredParameters.length; i++) {
+                String parameterName = declaredParameters[i];
+                String defaultValue = transMeta.getParameterDefault(parameterName);
+                String parameterValue = request.getParameter(parameterName) == null ? defaultValue : request.getParameter(parameterName);
+
+                // assign the value to the parameter on the transformation
+                transMeta.setParameterValue(parameterName, parameterValue);
+
+            }
+
+            if (showOnlyColumns) {
+                transMeta.setParameterValue("endpointPath", endpointPath);
+            }
+
+            Trans transformation = new Trans(transMeta);
+
+            // adjust the log level
+            transformation.setLogLevel(LogLevel.MINIMAL);
+
+            // starting the transformation, which will execute asynchronously
+            transformation.prepareExecution(new String[0]);
+
+            // find the "output" step
+            StepInterface step = transformation.getStepInterface(request.getParameter("stepOutput"), 0);
+
+            //parserResultset
+            // attach adapter receiving row events
+            RowAdapter rowAdapter = new RowAdapter() {
+
+                private boolean firstRow = true;
+
+                public void rowWrittenEvent(RowMetaInterface rowMeta, Object[] row) throws KettleStepException {
+
+                    if (firstRow) {
+                        firstRow = false;
+                        // a space to keep the captured rows
+                        capturedRows = new LinkedList<Object[]>();
+                        // keep the row structure for future reference
+                        rowStructure = rowMeta;
+
+                        metadata = new Metadata[rowMeta.size()];
+                        resultsetCda = new LinkedList<String>();
+                        resultsetVisualCue = new LinkedList<String>();
+
+                        for (int i = 0; i < rowMeta.size(); i++) {
+                            metadata[i] = new Metadata();
+                            metadata[i].setColIndex(i);
+                            metadata[i].setColName(rowMeta.getFieldNames()[i]);
+                            metadata[i].setColType(rowMeta.getFieldNamesAndTypes(0)[i].replace("(", "").replace(")", "").toString().trim());
+                        }
 
                     }
-                    
-                    if(showOnlyColumns)
-                        transMeta.setParameterValue("endpointPath", endpointPath);
+                    try {
 
-                    Trans transformation = new Trans(transMeta);
+                        boolean firstColumnResultset = true;
+                        String rowResultCda = new String();
+                        String rowResultVisualCue = new String();
 
-                    // adjust the log level
-                    transformation.setLogLevel(LogLevel.MINIMAL);
-
-                    // starting the transformation, which will execute asynchronously
-                    transformation.prepareExecution(new String[0]);
-
-                    // find the "output" step
-                    StepInterface step = transformation.getStepInterface(request.getParameter("stepOutput"), 0);
-
-                    //parserResultset
-                    // attach adapter receiving row events
-                    RowAdapter rowAdapter = new RowAdapter() {
-
-                        private boolean firstRow = true;
-
-                        public void rowWrittenEvent(RowMetaInterface rowMeta, Object[] row) throws KettleStepException {
-
-                            if (firstRow) {
-                                firstRow = false;
-                                // a space to keep the captured rows
-                                capturedRows = new LinkedList<Object[]>();
-                                // keep the row structure for future reference
-                                rowStructure = rowMeta;
-
-                                metadata = new Metadata[rowMeta.size()];
-                                resultsetCda = new LinkedList<String>();
-                                resultsetVisualCue = new LinkedList<String>();
-                                
-                                for (int i = 0; i < rowMeta.size(); i++) {
-                                     metadata[i] = new Metadata();
-                                     metadata[i].setColIndex(i);
-                                     metadata[i].setColName(rowMeta.getFieldNames()[i]);
-                                     metadata[i].setColType(rowMeta.getFieldNamesAndTypes(0)[i].replace("(","").replace(")","").toString().trim());
-                                }
-                                
+                        rowResultCda = "";
+                        rowResultVisualCue = "";
+                        for (int i = 0; i < rowMeta.size(); i++) {
+                            if (firstColumnResultset) {
+                                firstColumnResultset = false;
+                                rowResultCda = "\"" + rowMeta.getString(row, i).toString().trim() + "\"";
+                                rowResultVisualCue = "\"" + rowMeta.getFieldNames()[i] + "\": " + "\"" + rowMeta.getString(row, i).toString().trim() + "\"";
+                            } else {
+                                rowResultCda += ",\"" + rowMeta.getString(row, i).toString().trim() + "\"";
+                                rowResultVisualCue += ",\"" + rowMeta.getFieldNames()[i].toString() + "\": " + "\"" + rowMeta.getString(row, i).toString().trim() + "\"";
                             }
-                            try {
-                                
-                                boolean firstColumnResultset = true;
-                                String rowResultCda = new String();
-                                String rowResultVisualCue = new String();
-                                rowResultCda="";
-                                rowResultVisualCue="";
-                                for (int i = 0; i < rowMeta.size(); i++) {
-                                    if (firstColumnResultset){ 
-                                        firstColumnResultset = false;
-                                        rowResultCda ="\""+ rowMeta.getString(row, i).toString().trim() +"\"";
-                                        rowResultVisualCue ="\""+ rowMeta.getFieldNames()[i] +"\": " + "\""+ rowMeta.getString(row, i).toString().trim() +"\"";
-                                    }else{
-                                        rowResultCda +=",\""+ rowMeta.getString(row, i).toString().trim() +"\"";
-                                        rowResultVisualCue +=",\""+ rowMeta.getFieldNames()[i].toString() + "\": " + "\""+ rowMeta.getString(row, i).toString().trim() +"\"";
-                                    }
-                                    
-                                }
-                                resultsetCda.add(rowResultCda);
-                                resultsetVisualCue.add(rowResultVisualCue);
-                                
-                                
-                                
-                                // keep the row 
-                                capturedRows.add(row);
 
-                            } catch (KettleValueException e) {
-                                e.printStackTrace();
-                            }
                         }
-                    };
-                    step.addRowListener(rowAdapter);
+                        resultsetCda.add(rowResultCda);
+                        resultsetVisualCue.add(rowResultVisualCue);
 
-                    System.out.println("\nStarting transformation");
-                    transformation.startThreads();
+                        // keep the row 
+                        capturedRows.add(row);
 
-                    // waiting for the transformation to finish
-                    transformation.waitUntilFinished();
-                    //System.out.print("resultset "+resultsetToJson(resultset));
-                    // retrieve the result object, which captures the success of the transformation
-                    Result result = transformation.getResult();
-
-                    // report on the outcome of the transformation
-                    String resultRun = "Trans " + endpointPathLabel + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
-                    
-                    String outputType = request.getParameter("output_type");
-                    
-                    if(outputType.equals("cda"))
-                        jsonResult = "{\"status\": \""+resultRun+"\", \"metadata\":["+MetadataToJson(metadata)+"], \"resultset\":["+resultsetToCDAJson(resultsetCda)+"]}";    
-                    else if(outputType.equals("visualcue"))
-                        jsonResult = "{\"data\":["+resultsetToVisualCueJson(resultsetVisualCue)+"]}";    
-                    System.out.print(jsonResult);
-                } catch (Exception e) {
-                    // something went wrong, just log and return
-                    e.printStackTrace();
+                    } catch (KettleValueException e) {
+                        e.printStackTrace();
+                    }
                 }
+            };
+            step.addRowListener(rowAdapter);
 
-            }
+            System.out.println("\nStarting transformation");
+            transformation.startThreads();
 
-            static public String MetadataToJson(Metadata[] metadata) {
-                String json = "";
-                Boolean firstRow = true;
-                for (Metadata item : metadata) {
-                    if (firstRow) {
-                        firstRow = false;
-                        json += "{\"colIndex\":" + item.getColIndex() + ","
-                                + "\"colType\":\"" + item.getColType() + "\","
-                                + "\"colName\":\"" + item.getColName() + "\"}";
-                    } else {
-                        json += ",{\"colIndex\":" + item.getColIndex() + ","
-                                + "\"colType\":\"" + item.getColType() + "\","
-                                + "\"colName\":\"" + item.getColName() + "\"}";
-                    }                  
+            // waiting for the transformation to finish
+            transformation.waitUntilFinished();
+
+            //System.out.print("resultset "+resultsetToJson(resultset));
+            // retrieve the result object, which captures the success of the transformation
+            Result result = transformation.getResult();
+
+            // report on the outcome of the transformation
+            String resultRun = "Trans " + endpointPathLabel + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
+
+            String outputType = request.getParameter("output_type");
+
+            if(metadata !=  null){
+                //System.out.print("metadata: "+MetadataToJson(metadata));
+                if (outputType.equals("cda")) {
+                    jsonResult = "{\"status\": \"" + resultRun + "\", \"metadata\":[" + MetadataToJson(metadata) + "], \"resultset\":[" + resultsetToCDAJson(resultsetCda) + "]}";
+                } else if (outputType.equals("visualcue")) {
+                    jsonResult = "{\"data\":[" + resultsetToVisualCueJson(resultsetVisualCue) + "]}";
                 }
-                return json;
-            }
-            
-            static public String resultsetToCDAJson(List<String> resultset) {
-                String json = "";
-                Boolean firstRow = true;
-                for (String item : resultset) {
-                    if (firstRow) {
-                        firstRow = false;
-                        json += "["+ item +"]";
-                    } else {
-                        json += ",["+ item +"]";
-                    }                  
+            }else{
+                if (outputType.equals("cda")) {
+                    jsonResult = "{\"status\": \"" + resultRun + "\", \"metadata\":[], \"resultset\":[]}";
+                } else if (outputType.equals("visualcue")) {
+                    jsonResult = "{\"data\":[]}";
                 }
-                return json;
             }
-            
-            static public String resultsetToVisualCueJson(List<String> resultset) {
-                String json = "";
-                Boolean firstRow = true;
-                for (String item : resultset) {
-                    
-                    if (firstRow) {
-                        firstRow = false;
-                        json += "{"+ item +"}";
-                    } else {
-                        json += ",{"+ item +"}";
-                    }                  
-                }
-                //System.out.print(json);
-                return json;
-                
-            }
-        %>
 
-        <%
-            //clear cache
-            jsonResult = "";
-            //init Kettle
-            try {
-                Boolean showOnlyColumns = request.getParameter("showOnlyColumns") == null ? false : true;
-                //Boolean showOnlyColumns = showOnlyColumnsTemp.equals("true") ? true : false;
-                
-                String endpointPath = request.getParameter("endpointPath");
-                String endpointPathLabel = showOnlyColumns == false ? request.getParameter("endpointPath") : "getColumns.ktr";
-    
-                KettleEnvironment.init();
-                String webRootPath = application.getRealPath("/").replace('\\', '/');
-                String endpointPathReal = showOnlyColumns == false ? webRootPath + "kettle/" + endpointPath : webRootPath + "kettle/system/getColumns.ktr";
-                /*
-                System.out.println("\nendpointPathReal: "+endpointPathReal+"\n"
-                +"endpointPath: "+endpointPath+"\n"
-                +"endpointPathLabel: "+endpointPathLabel+"\n"
-                +"showOnlyColumns: "+showOnlyColumns+"\n");
-                */
-                runTransformation(endpointPathReal, endpointPath, endpointPathLabel, showOnlyColumns, request);
-            } catch (KettleException e) {
-                e.printStackTrace();
-                return;
-            }
-        %>    
+            //System.out.print(jsonResult);
+        } catch (Exception e) {
+            // something went wrong, just log and return
+            e.printStackTrace();
+        }
 
-        <%= jsonResult%>
+    }
+
+    static public String MetadataToJson(Metadata[] metadata) {
+        String json = "";
+        Boolean firstRow = true;
+        for (Metadata item : metadata) {
+            if (firstRow) {
+                firstRow = false;
+                json += "{\"colIndex\":" + item.getColIndex() + ","
+                        + "\"colType\":\"" + item.getColType() + "\","
+                        + "\"colName\":\"" + item.getColName() + "\"}";
+            } else {
+                json += ",{\"colIndex\":" + item.getColIndex() + ","
+                        + "\"colType\":\"" + item.getColType() + "\","
+                        + "\"colName\":\"" + item.getColName() + "\"}";
+            }
+        }
+        return json;
+    }
+
+    static public String resultsetToCDAJson(List<String> resultset) {
+        String json = "[]";
+        Boolean firstRow = true;
+        for (String item : resultset) {
+            if (firstRow) {
+                firstRow = false;
+                json = "[" + item + "]";
+            } else {
+                json += ",[" + item + "]";
+            }
+        }
+        return json;
+    }
+
+    static public String resultsetToVisualCueJson(List<String> resultset) {
+        String json = "[]";
+        Boolean firstRow = true;
+        for (String item : resultset) {
+
+            if (firstRow) {
+                firstRow = false;
+                json = "{" + item + "}";
+            } else {
+                json += ",{" + item + "}";
+            }
+        }
+        //System.out.print(json);
+        return json;
+
+    }
+%>
+
+<%
+    //clear cache
+    jsonResult = "";
+    //init Kettle
+    try {
+        Boolean showOnlyColumns = request.getParameter("showOnlyColumns") == null ? false : true;
+        //Boolean showOnlyColumns = showOnlyColumnsTemp.equals("true") ? true : false;
+
+        String endpointPath = request.getParameter("endpointPath");
+        String endpointPathLabel = showOnlyColumns == false ? request.getParameter("endpointPath") : "getColumns.ktr";
+
+        KettleEnvironment.init();
+        String webRootPath = application.getRealPath("/").replace('\\', '/');
+        String endpointPathReal = showOnlyColumns == false ? webRootPath + "kettle/" + endpointPath : webRootPath + "kettle/system/getColumns.ktr";
+        /*
+         System.out.println("\nendpointPathReal: "+endpointPathReal+"\n"
+         +"endpointPath: "+endpointPath+"\n"
+         +"endpointPathLabel: "+endpointPathLabel+"\n"
+         +"showOnlyColumns: "+showOnlyColumns+"\n");
+         */
+        runTransformation(endpointPathReal, endpointPath, endpointPathLabel, showOnlyColumns, request);
+    } catch (KettleException e) {
+        e.printStackTrace();
+        return;
+    }
+%>    
+
+<%= jsonResult%>
