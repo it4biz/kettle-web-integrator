@@ -224,7 +224,7 @@ page language="java"
         <title>Kettle Web integrator</title>
 
         <!-- bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container-fluid">
@@ -261,5 +261,5 @@ page language="java"
         </div>
     </body>
     <!-- bootstrap api js -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
 </html>
