@@ -22,10 +22,12 @@
 *
 ******************************************************************************/
 
-
---%>
-<%@page contentType="application/xml; charset=UTF-8" pageEncoding="UTF-8"%>
+force dowloand the file
 <%response.setHeader("Content-Disposition", "attachment; filename=listTransformations.xml");%>
+--%>
+
+<%@page contentType="application/xml; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@
 page language="java"
      import="java.net.URLEncoder
@@ -165,6 +167,7 @@ page language="java"
                         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
                         jaxbMarshaller.marshal(transforms, sw);
                         xmlResult = sw.toString();
+                        
                         //System.out.println(xmlResult);
                         // keep the row 
                         capturedRows.add(row);
