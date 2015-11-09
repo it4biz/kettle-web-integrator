@@ -46,7 +46,8 @@ page language="java"
      , org.pentaho.di.job.Job
      , org.pentaho.di.job.JobMeta
      , org.pentaho.di.trans.step.RowAdapter
-     , org.pentaho.di.trans.step.StepInterface"%>
+     , org.pentaho.di.trans.step.StepInterface
+     , com.google.gson.Gson"%>
 
 <%@page contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -128,13 +129,18 @@ page language="java"
                         rowResultCda = "";
                         rowResultVisualCue = "";
                         for (int i = 0; i < rowMeta.size(); i++) {
+                            Gson gson = new Gson();
+                            String fieldName = rowMeta.getFieldNames()[i];
+                            String value = rowMeta.getString(row, i);
+
                             if (firstColumnResultset) {
                                 firstColumnResultset = false;
-                                rowResultCda = "\"" + rowMeta.getString(row, i).toString().trim() + "\"";
-                                rowResultVisualCue = "\"" + rowMeta.getFieldNames()[i] + "\": " + "\"" + rowMeta.getString(row, i).toString().trim() + "\"";
+
+                                rowResultCda = gson.toJson(value);
+                                rowResultVisualCue = gson.toJson(fieldName) + ":" + gson.toJson(value);
                             } else {
-                                rowResultCda += ",\"" + rowMeta.getString(row, i).toString().trim() + "\"";
-                                rowResultVisualCue += ",\"" + rowMeta.getFieldNames()[i].toString() + "\": " + "\"" + rowMeta.getString(row, i).toString().trim() + "\"";
+                                rowResultCda += "," + gson.toJson(value);
+                                rowResultVisualCue += "," + gson.toJson(fieldName) + ":" + gson.toJson(value);
                             }
 
                         }
@@ -166,14 +172,14 @@ page language="java"
 
             String outputType = request.getParameter("output_type");
 
-            if(metadata !=  null){
+            if (metadata != null) {
                 //System.out.print("metadata: "+MetadataToJson(metadata));
                 if (outputType.equals("cda")) {
                     jsonResult = "{\"status\": \"" + resultRun + "\", \"metadata\":[" + MetadataToJson(metadata) + "], \"resultset\":[" + resultsetToCDAJson(resultsetCda) + "]}";
                 } else if (outputType.equals("visualcue")) {
                     jsonResult = "{\"data\":[" + resultsetToVisualCueJson(resultsetVisualCue) + "]}";
                 }
-            }else{
+            } else {
                 if (outputType.equals("cda")) {
                     jsonResult = "{\"status\": \"" + resultRun + "\", \"metadata\":[], \"resultset\":[]}";
                 } else if (outputType.equals("visualcue")) {

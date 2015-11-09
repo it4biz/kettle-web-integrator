@@ -1,0 +1,1 @@
+Add here the external plugins of your solution.

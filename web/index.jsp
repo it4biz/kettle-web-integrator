@@ -27,6 +27,9 @@
 
 
 
+<%@page import="org.pentaho.di.core.plugins.StepPluginType"%>
+<%@page import="org.pentaho.di.core.plugins.PluginFolder"%>
+<%@page import="org.pentaho.di.trans.steps.salesforceinput.SalesforceInput"%>
 <%@
 page language="java"
      import="java.net.URLEncoder
@@ -213,13 +216,21 @@ page language="java"
 <%
     //init Kettle
     try {
-        listTableFormatted = "";
-        KettleEnvironment.init();
         String webRootPath = application.getRealPath("/").replace('\\', '/');
         String endpointTypeList = request.getParameter("endpointTypeList");
         String directory = request.getParameter("directory");
-
         contextWeb = request.getContextPath();
+        
+        listTableFormatted = "";
+        
+        //get all external plugins
+        StepPluginType.getInstance().getPluginFolders().add(new PluginFolder(webRootPath+"/kettle/system/plugins/", false, true));
+        
+        KettleEnvironment.init();
+       
+        
+
+        
         runTransformation(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
     } catch (KettleException e) {
         e.printStackTrace();

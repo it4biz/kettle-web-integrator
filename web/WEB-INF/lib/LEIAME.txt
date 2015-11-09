@@ -1,1 +1,0 @@
-Remover as libs servet_2.5 e jsp_2.0 sempre.
