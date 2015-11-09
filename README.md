@@ -123,3 +123,6 @@ https://github.com/it4biz/kettle-web-integrator/blob/master/samples/kettle-web-i
 
 ### Project on SourceForge
 https://sourceforge.net/projects/kettle-web-integrator/
+
+###Professional Support
+Please contact info@it4biz.com.br for Professional Support.
