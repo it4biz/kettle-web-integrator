@@ -65,6 +65,7 @@ page language="java"
             + "<form target='_blank' action='${type_file}' method='get'>"
             + "${parameters}"
             + "<input type='hidden' id='endpointPath' name='endpointPath' value='${endpoint_path}'>"
+            + "<input type='hidden' id='directory' name='directory' value='${directory}'>"
             + "<hr>"
             + "<div class='form-group'>"
             + "<label for='stepOutput'>Step output name (insert the name of step that you want show data)</label>"
@@ -95,7 +96,7 @@ page language="java"
             + "</td>"
             + "</tr>";
 
-    public void runTransformation(String filename, String endpointTypeList, String directory) {
+    public void runTransformation(String filename, String endpointTypeList) {
 
         try {
 
@@ -187,6 +188,7 @@ page language="java"
                         String endpointPath = fileName.replace(kettleFolder, "");
                         listTableFormatted += listTableTemplate.replace("${short_filename}", rowMeta.getString(row, 1))
                                 .replace("${parameters}", parameters)
+                                .replace("${directory}", directory)
                                 .replace("${endpoint_path}", endpointPath)
                                 .replace("${type_file_show_columns}", contextWeb + "/showColumns" + typeFile + ".jsp")
                                 .replace("${type_file}", contextWeb + "/run" + typeFile + ".jsp");
@@ -233,7 +235,7 @@ page language="java"
         if(indexTypeList == true)
             request.getRequestDispatcher("metadataTransformations.jsp").forward(request,response);
         else
-            runTransformation(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
+            runTransformation(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList);
     } catch (KettleException e) {
         e.printStackTrace();
         return;

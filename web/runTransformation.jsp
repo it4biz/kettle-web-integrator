@@ -253,12 +253,13 @@ page language="java"
         Boolean showOnlyColumns = request.getParameter("showOnlyColumns") == null ? false : true;
         //Boolean showOnlyColumns = showOnlyColumnsTemp.equals("true") ? true : false;
 
+        String directory = request.getParameter("directory");
         String endpointPath = request.getParameter("endpointPath");
         String endpointPathLabel = showOnlyColumns == false ? request.getParameter("endpointPath") : "getColumns.ktr";
 
         KettleEnvironment.init();
         String webRootPath = application.getRealPath("/").replace('\\', '/');
-        String endpointPathReal = showOnlyColumns == false ? webRootPath + "kettle/" + endpointPath : webRootPath + "kettle/system/getColumns.ktr";
+        String endpointPathReal = showOnlyColumns == false ? webRootPath + directory +"/" + endpointPath : webRootPath + "kettle/system/getColumns.ktr";
         /*
          System.out.println("\nendpointPathReal: "+endpointPathReal+"\n"
          +"endpointPath: "+endpointPath+"\n"
