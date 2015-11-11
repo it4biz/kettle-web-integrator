@@ -198,7 +198,7 @@
     <rownum_field/>
     <encoding>UTF-8</encoding>
     <file>
-      <name>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x2f;..&#x2f;&#x24;&#x7b;endpointPath&#x7d;</name>
+      <name>&#x24;&#x7b;endpointPath&#x7d;</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>

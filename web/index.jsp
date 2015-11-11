@@ -189,9 +189,10 @@ page language="java"
                         listTableFormatted += listTableTemplate.replace("${short_filename}", rowMeta.getString(row, 1))
                                 .replace("${parameters}", parameters)
                                 .replace("${directory}", directory)
-                                .replace("${endpoint_path}", endpointPath)
+                                .replace("${endpoint_path}", fileName)
                                 .replace("${type_file_show_columns}", contextWeb + "/showColumns" + typeFile + ".jsp")
                                 .replace("${type_file}", contextWeb + "/run" + typeFile + ".jsp");
+                        //System.out.println(endpointPath);
                         // keep the row 
                         capturedRows.add(row);
 
