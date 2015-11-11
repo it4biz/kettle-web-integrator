@@ -63,7 +63,7 @@ If you need specify a directory to read transformations and jobs, it's necessary
 
 ### Installing on Apache Tomcat 8.0.27
 
-* Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
+* Download kettle-web-integrator.war from http://sourceforge.net/projects/kettle-web-integrator/files/0.4/kettle-web-integrator-v.0.4Stable.war/download
 * Download Apache Tomcat 8.0.27 from http://apache.rediris.es/tomcat/tomcat-8/v8.0.27/bin/apache-tomcat-8.0.27.tar.gz
 * Copy kettle-web-integrator.war to apache-tomcat-8.0.27/webapps
 * Find catalina.sh at apache-tomcat-8.0.27/bin
