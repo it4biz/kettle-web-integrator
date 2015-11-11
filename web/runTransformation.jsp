@@ -50,7 +50,7 @@ page language="java"
      , com.google.gson.Gson"%>
 
 <%@page contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page trimDirectiveWhitespaces="true" %>
 <%!
     List<Object[]> capturedRows;
     RowMetaInterface rowStructure;
