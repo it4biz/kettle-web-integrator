@@ -260,8 +260,8 @@ page language="java"
         KettleEnvironment.init();
         String webRootPath = application.getRealPath("/").replace('\\', '/');
         String endpointPathReal = showOnlyColumns == false ? endpointPath : webRootPath + "kettle/system/getColumns.ktr";
-        System.out.println("showOnlyColumns: "+showOnlyColumns);
-        System.out.println("endpointPathReal "+endpointPathReal);
+        //System.out.println("showOnlyColumns: "+showOnlyColumns);
+        //System.out.println("endpointPathReal "+endpointPathReal);
         /*
          System.out.println("\nendpointPathReal: "+endpointPathReal+"\n"
          +"endpointPath: "+endpointPath+"\n"
