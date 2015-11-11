@@ -54,6 +54,13 @@ http://blog.professorcoruja.com/2015/10/origin-of-kettle-pdi-pentaho-data.html<B
 
 	* If you need install a external plugin of Kettle, copy the entire folder of plugin to kettle/system/plugins.
 
+#### Directory parameter
+If you need specify a directory to read transformations and jobs, it's necessary to maintain the structure:
+	
+	/myDirectory	
+		/transformations	
+		/jobs
+
 ### Installing on Apache Tomcat 8.0.27
 
 * Download kettle-web-integrator.war from https://sourceforge.net/projects/kettle-web-integrator/files/0.2/kettle-web-integrator.war/download
