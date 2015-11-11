@@ -57,6 +57,7 @@ page language="java"
     RowMetaInterface rowStructure;
     String listTableFormatted = "";
     String contextWeb;
+    String directory;
     String listTableTemplate
             = "<tr>"
             + "<td>${short_filename}</td>"
@@ -218,20 +219,21 @@ page language="java"
     try {
         String webRootPath = application.getRealPath("/").replace('\\', '/');
         String endpointTypeList = request.getParameter("endpointTypeList");
-        String directory = request.getParameter("directory");
+        directory = request.getParameter("directory") != null ? request.getParameter("directory") : "kettle";
+        boolean indexTypeList = Boolean.parseBoolean(request.getParameter("indexTypeList"));
         contextWeb = request.getContextPath();
-        
-        listTableFormatted = "";
-        
-        //get all external plugins
-        StepPluginType.getInstance().getPluginFolders().add(new PluginFolder(webRootPath+"/kettle/system/plugins/", false, true));
-        
-        KettleEnvironment.init();
-       
-        
 
-        
-        runTransformation(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
+        listTableFormatted = "";
+
+        //get all external plugins
+        StepPluginType.getInstance().getPluginFolders().add(new PluginFolder(webRootPath + "/kettle/system/plugins/", false, true));
+
+        KettleEnvironment.init();
+
+        if(indexTypeList == true)
+            request.getRequestDispatcher("metadataTransformations.jsp").forward(request,response);
+        else
+            runTransformation(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
     } catch (KettleException e) {
         e.printStackTrace();
         return;
@@ -254,12 +256,12 @@ page language="java"
                 <h1>List Endpoints <small>Kettle Web integrator</small></h1>
             </div>
             <div>
-                <form target="_blank" action="/kettle-web-integrator/metadataTransformations.jsp" method="get" class="form-inline">
+                <form action="index.jsp" method="get" class="form-inline">
 
                     <div class="form-group">
                         <div class="form-group">
                             <label for="directory">Data from directory </label>
-                            <input type="text" class="form-control" id="directory" name="directory" value="kettle">
+                            <input type="text" class="form-control" id="directory" name="directory" value="<%= directory %>">
                         </div>
 
                         <label for="endpointTypeList">Show endpoints of type</label>
@@ -277,15 +279,27 @@ page language="java"
                                 Only jobs
                             </label>
                         </div>
+
+                        <label for="indexTypeList">View this page as a XML</label>    
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="indexTypeList" id="indexTypeList" value="true">
+                                Yes
+                            </label>
+                            <label>
+                                <input type="radio" name="indexTypeList" id="indexTypeList" value="false" checked>
+                                No
+                            </label>
+                        </div>
                     </div>      
                     <button type='submit' class='btn btn-default btn-md pull-right'>
-                        <span class='glyphicon glyphicon-play' aria-hidden='true'></span> View this page as a XML
+                        <span class='glyphicon glyphicon-play' aria-hidden='true'></span> Update
                     </button>
                 </form>
             </div>
-            
+
             <hr>
-            
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
