@@ -59,8 +59,8 @@ page language="java"
     List<String> resultsetCda;
     List<String> resultsetVisualCue;
 
-    public void runTransformation(String filename, String endpointPath, boolean showOnlyColumns, HttpServletRequest request) {
-        
+    public void runTransformation(String filename, String endpointLabel, boolean showOnlyColumns, HttpServletRequest request) {
+       
         try {
 
             // load transformation definition file
@@ -79,7 +79,7 @@ page language="java"
             }
             
             if (showOnlyColumns) {
-                transMeta.setParameterValue("endpointPath", endpointPath);
+                transMeta.setParameterValue("endpointPath", endpointLabel);
             }
 
             Trans transformation = new Trans(transMeta);
@@ -168,7 +168,7 @@ page language="java"
             Result result = transformation.getResult();
 
             // report on the outcome of the transformation
-            String resultRun = "Trans " + endpointPath + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
+            String resultRun = "Trans " + endpointLabel + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
 
             String outputType = request.getParameter("output_type");
 
@@ -252,23 +252,17 @@ page language="java"
     try {
         boolean showOnlyColumns = Boolean.parseBoolean(request.getParameter("showOnlyColumns"));
         //Boolean showOnlyColumns = showOnlyColumnsTemp.equals("true") ? true : false;
-
-        String directory = request.getParameter("directory");
-        String endpointPath = request.getParameter("endpointPath");
  
-
-        KettleEnvironment.init();
+        String directory = request.getParameter("directory");
         String webRootPath = application.getRealPath("/").replace('\\', '/');
+        String endpointPath = webRootPath+request.getParameter("endpointPath");
+        
         String endpointPathReal = showOnlyColumns == false ? endpointPath : webRootPath + "kettle/system/getColumns.ktr";
-        //System.out.println("showOnlyColumns: "+showOnlyColumns);
+        
+        KettleEnvironment.init();
         //System.out.println("endpointPathReal "+endpointPathReal);
-        /*
-         System.out.println("\nendpointPathReal: "+endpointPathReal+"\n"
-         +"endpointPath: "+endpointPath+"\n"
-         +"endpointPathLabel: "+endpointPathLabel+"\n"
-         +"showOnlyColumns: "+showOnlyColumns+"\n");
-         */
-        runTransformation(endpointPathReal, endpointPath, showOnlyColumns, request);
+        //System.out.println("endpointPath "+endpointPath);
+        runTransformation(endpointPathReal, request.getParameter("endpointPath"), showOnlyColumns, request);
     } catch (KettleException e) {
         e.printStackTrace();
         return;

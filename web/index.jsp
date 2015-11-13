@@ -183,7 +183,7 @@ page language="java"
                             }
                             //parameters += "<hr>";
                         }
-                        String fileName = rowMeta.getString(row, 4);
+                        String fileName = typeFile.equals("Transformation") ? directory+"/transformations/"+rowMeta.getString(row, 1) : directory+"/jobs/"+rowMeta.getString(row, 1);
                         String kettleFolder = rowMeta.getString(row, 5);
                         String endpointPath = fileName.replace(kettleFolder, "");
                         listTableFormatted += listTableTemplate.replace("${short_filename}", rowMeta.getString(row, 1))
@@ -192,7 +192,7 @@ page language="java"
                                 .replace("${endpoint_path}", fileName)
                                 .replace("${type_file_show_columns}", contextWeb + "/showColumns" + typeFile + ".jsp")
                                 .replace("${type_file}", contextWeb + "/run" + typeFile + ".jsp");
-                        //System.out.println(endpointPath);
+                        //System.out.println("fileName: "+fileName);
                         // keep the row 
                         capturedRows.add(row);
 

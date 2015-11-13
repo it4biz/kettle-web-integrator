@@ -56,7 +56,7 @@ page language="java"
             List<Object[]> capturedRows;
             RowMetaInterface rowStructure;
             String resultRun;
-            public void runTransformation(String filename, String endpointPath) {
+            public void runTransformation(String filename, String endpointPathLabel) {
 
                 try {
 
@@ -80,7 +80,7 @@ page language="java"
                     Result result = job.getResult();
 
                     // report on the outcome of the transformation
-                    resultRun = "\nJob " + endpointPath + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
+                    resultRun = "\nJob " + endpointPathLabel + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
                     
                 } catch (Exception e) {
                     // something went wrong, just log and return
@@ -93,11 +93,13 @@ page language="java"
         <%
             //init Kettle
             try {
-                String endpointPath = request.getParameter("endpointPath");
+                String webRootPath = application.getRealPath("/").replace('\\', '/');
+                
+                String endpointPath = webRootPath+request.getParameter("endpointPath");
 
                 KettleEnvironment.init();
-                String webRootPath = application.getRealPath("/").replace('\\', '/');
-                runTransformation(webRootPath + "kettle/" + endpointPath, endpointPath);
+                
+                runTransformation(endpointPath, request.getParameter("endpointPath"));
             } catch (KettleException e) {
                 e.printStackTrace();
                 return;
