@@ -58,6 +58,7 @@ page language="java"
     List<Object[]> capturedRows;
     RowMetaInterface rowStructure;
     String webRootPath;
+    String directory;
     String contextWeb;
     String xmlResult;
     int countTransf = 0;
@@ -68,7 +69,7 @@ page language="java"
     JAXBContext context;
     Marshaller jaxbMarshaller;
 
-    public void getTransformationMetadata(String filename, String endpointTypeList, String directory) {
+    public void getTransformationMetadata(String filename, String endpointTypeList) {
         transforms = new Transforms();
         transforms.setTransform(new ArrayList<Transform>());
 
@@ -157,7 +158,8 @@ page language="java"
                         String endpointPathReal = webRootPath + "kettle/system/getColumns.ktr";    
                         
                         String fileName = rowMeta.getString(row, 1);
-                        String endpointPath = "transformations/"+fileName;
+                        String endpointPath = directory+"/transformations/"+fileName;
+                        //System.out.println(endpointPath);
                         String kettleFolder = rowMeta.getString(row, 2);
                  
                         runTransformation(endpointPathReal, endpointPath);
@@ -207,10 +209,9 @@ page language="java"
 
             // load transformation definition file
             TransMeta transMeta = new TransMeta(filename, (Repository) null);
-
+            
             transMeta.setParameterValue("endpointPath", endpointPath);
             
-
             Trans transformation = new Trans(transMeta);
 
             // adjust the log level
@@ -239,7 +240,7 @@ page language="java"
 
                     }
                     try {
-
+                            
                         boolean firstColumnResultset = true;
                         
                         for (int i = 0; i < rowMeta.size(); i++) {
@@ -285,10 +286,11 @@ page language="java"
         KettleEnvironment.init();
         webRootPath = application.getRealPath("/").replace('\\', '/');
         contextWeb = request.getContextPath();
-        String endpointTypeList = request.getParameter("endpointTypeList");
-        String directory = request.getParameter("directory");
         
-        getTransformationMetadata(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList, directory);
+        String endpointTypeList = request.getParameter("endpointTypeList");
+        directory = request.getParameter("directory");
+        
+        getTransformationMetadata(webRootPath + "kettle/system/listEndpoints.ktr", endpointTypeList);
 
         out.write(xmlResult);
     } catch (KettleException e) {
