@@ -94,12 +94,12 @@ page language="java"
             //init Kettle
             try {
                 String webRootPath = application.getRealPath("/").replace('\\', '/');
-                
-                String endpointPath = webRootPath+request.getParameter("endpointPath");
+                String directory = request.getParameter("directory");
+                String endpointPath = request.getParameter("endpointPath");
 
                 KettleEnvironment.init();
                 
-                runTransformation(endpointPath, request.getParameter("endpointPath"));
+                runTransformation(webRootPath+directory+"/jobs/"+endpointPath, endpointPath);
             } catch (KettleException e) {
                 e.printStackTrace();
                 return;

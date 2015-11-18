@@ -59,8 +59,8 @@ page language="java"
     List<String> resultsetCda;
     List<String> resultsetVisualCue;
 
-    public void runTransformation(String filename, String endpointLabel, boolean showOnlyColumns, HttpServletRequest request) {
-       
+    public void runTransformation(String filename, String endpointLabel, String endpointPath, boolean showOnlyColumns, HttpServletRequest request) {
+       System.out.print("filename: "+filename);
         try {
 
             // load transformation definition file
@@ -168,7 +168,7 @@ page language="java"
             Result result = transformation.getResult();
 
             // report on the outcome of the transformation
-            String resultRun = "Trans " + endpointLabel + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
+            String resultRun = "Trans " + endpointPath + " executed " + (result.getNrErrors() == 0 ? "successfully" : "with " + result.getNrErrors() + " errors");
 
             String outputType = request.getParameter("output_type");
 
@@ -255,14 +255,14 @@ page language="java"
  
         String directory = request.getParameter("directory");
         String webRootPath = application.getRealPath("/").replace('\\', '/');
-        String endpointPath = webRootPath+request.getParameter("endpointPath");
+        String endpointPath = request.getParameter("endpointPath");
         
-        String endpointPathReal = showOnlyColumns == false ? endpointPath : webRootPath + "kettle/system/getColumns.ktr";
+        String endpointPathReal = showOnlyColumns == false ? webRootPath+directory+"/transformations/"+endpointPath : webRootPath + "kettle/system/getColumns.ktr";
         
         KettleEnvironment.init();
         //System.out.println("endpointPathReal "+endpointPathReal);
         //System.out.println("endpointPath "+endpointPath);
-        runTransformation(endpointPathReal, request.getParameter("endpointPath"), showOnlyColumns, request);
+        runTransformation(endpointPathReal, directory+"/transformations/"+endpointPath, endpointPath, showOnlyColumns, request);
     } catch (KettleException e) {
         e.printStackTrace();
         return;

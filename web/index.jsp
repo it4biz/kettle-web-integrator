@@ -183,7 +183,7 @@ page language="java"
                             }
                             //parameters += "<hr>";
                         }
-                        String fileName = typeFile.equals("Transformation") ? directory+"/transformations/"+rowMeta.getString(row, 1) : directory+"/jobs/"+rowMeta.getString(row, 1);
+                        String fileName = rowMeta.getString(row, 1);
                         String kettleFolder = rowMeta.getString(row, 5);
                         String endpointPath = fileName.replace(kettleFolder, "");
                         listTableFormatted += listTableTemplate.replace("${short_filename}", rowMeta.getString(row, 1))
