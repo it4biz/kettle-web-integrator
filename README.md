@@ -4,6 +4,11 @@ Welcome to Kettle Web integrator Project.
 
 Kettle Web Integrator - An easy and open way to integrate your web app with Kettle Pentaho Data Integration.
 
+The actual version is 0.4 and it is stable. Feel free to use it.
+
+Link:
+https://github.com/it4biz/kettle-web-integrator/releases/tag/v0.4Stable
+
 ### Kettle / PDI
 
 Pentaho Data Integration (PDI, also called Kettle) is the component of Pentaho responsible for the Extract, Transform and Load (ETL) processes. Though ETL tools are most frequently used in data warehouses environments, PDI can also be used for other purposes:
